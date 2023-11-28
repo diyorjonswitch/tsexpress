@@ -1,7 +1,8 @@
 import "dotenv/config";
 import express, { Application } from "express";
 import {connect} from 'mongoose'
-import { categoryRouter } from "./router/category.router.js";
+import { flowerRouter } from "./modules/flowers/router/flower.router.js";
+import { categoryRouter } from "./modules/category/router/category.router.js";
 import {dbConnected} from './utils/db.connection.js'
 
 async function starter(): Promise<void> {
@@ -13,6 +14,7 @@ async function starter(): Promise<void> {
         console.log('db connection...');
         
         app.use(categoryRouter);
+        app.use(flowerRouter)
 
         app.listen(process.env.APP_PORT, () => {
             console.log('Server is running on port: ' + process.env.APP_PORT);

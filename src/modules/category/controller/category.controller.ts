@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { CategoryModel } from "../category/models/category.model.js";
+import { CategoryModel } from "../models/category.model.js";
 
 class CategoryController {
     async getCategory(req: Request, res: Response): Promise<void>{
         try {
-            const categories = await CategoryModel.find();
+            const categories = await CategoryModel.find().populate('flowers').exec();
             res.status(200).json({msg: 'succesfull', data: categories, error: false})
         } catch (err: any) {
             res.status(500).json({msg: 'error', data: null, error: true})

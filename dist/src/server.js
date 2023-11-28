@@ -10,7 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import "dotenv/config";
 import express from "express";
 import { connect } from 'mongoose';
-import { categoryRouter } from "./router/category.router.js";
+import { flowerRouter } from "./modules/flowers/router/flower.router.js";
+import { categoryRouter } from "./modules/category/router/category.router.js";
 import { dbConnected } from './utils/db.connection.js';
 function starter() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -21,6 +22,7 @@ function starter() {
             yield connect('mongodb://127.0.0.1:27017/test');
             console.log('db connection...');
             app.use(categoryRouter);
+            app.use(flowerRouter);
             app.listen(process.env.APP_PORT, () => {
                 console.log('Server is running on port: ' + process.env.APP_PORT);
             });
